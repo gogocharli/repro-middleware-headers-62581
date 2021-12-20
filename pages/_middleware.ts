@@ -9,8 +9,10 @@ export default async function middleware(
 ) {
   const { pathname } = request.nextUrl;
 
-  const path = request.url ?? pathname;
-  if (path === '/') {
+  if (
+    !pathname.includes('.') && // exclude all files in the public folder
+    !pathname.startsWith('/api') // exclude all API routes
+  ) {
     // Will rewrite to headers dump file
     const res = NextResponse.rewrite(
       'https://quick-dump-codetaromiura.vercel.app',
