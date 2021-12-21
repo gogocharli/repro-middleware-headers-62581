@@ -15,12 +15,13 @@ export default async function middleware(
   ) {
     // Will rewrite to headers dump file
     const res = NextResponse.rewrite(
-      'https://quick-dump-codetaromiura.vercel.app',
+      'https://quick-dump-codetaromiura.vercel.app/api/hello',
     );
 
     // Setting custom headers – Used for testing
     res.headers.set('Referer', 'referer-value');
     res.headers.set('Referrer-Policy', 'unsafe-url');
+    res.headers.set('x-custom-header', 'custom-value');
     return res;
   } else {
     return NextResponse.next();
